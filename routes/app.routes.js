@@ -6,8 +6,7 @@ const Visitors = require('../models/Visitors.model')
 
 router.get('/', async (req,res)=>{        
     try {
-        if(req.query.name === 'Anónimo' || req.query.name === ''){
-                        
+        if(req.query.name === 'Anónimo' || req.query.name === ''|| req.query.name === undefined){                        
             const visitor = new Visitors(req.query);            
             visitor.name = 'Anónimo';
             visitor.count = 1;
