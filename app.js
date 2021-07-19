@@ -5,7 +5,7 @@ const { ExpressHandlebars } = require('express-handlebars');
 const path = require('path')
 const app = express();
 const hbs = require('express-handlebars');
-const port = 3001;
+const port = 3000;
 
 // import routes
 const routes = require('./routes/app.routes');
