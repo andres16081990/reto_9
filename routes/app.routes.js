@@ -4,26 +4,27 @@ const router = require('express').Router();
 
 const Visitors = require('../models/Visitors.model')
 
-router.get('/', async (req,res)=>{    
-    const visitor = new Visitors(req.query);
-    const existstVisitor = await Visitors.findOne({name : req.query.name})
-
+router.get('/', async (req,res)=>{        
     try {
-    if(req.query.name === undefined || req.query.name === ''){
-
-        visitor.name = 'Anónimo';
-        visitor.count = 1;
-        await visitor.save();
-    }
-    if(req.query.name !== ''){
-        if(existstVisitor){
-            existstVisitor.count += 1;
-            await existstVisitor.save();
-        } 
-        if(!existstVisitor){
+        if(req.query.name === 'Anónimo' || req.query.name === ''){
+                        
+            const visitor = new Visitors(req.query);            
+            visitor.name = 'Anónimo';
             visitor.count = 1;
             await visitor.save();
-        }        
+        }
+        if(req.query.name !== ''){
+            const existstVisitor = await Visitors.findOne({name : req.query.name})
+            
+            if(existstVisitor){
+                existstVisitor.count += 1;
+                await existstVisitor.save();
+            } 
+            if(!existstVisitor){
+                const visitor = new Visitors(req.query);                
+                visitor.count = 1;
+                await visitor.save();
+            }        
                 
     }    
     
