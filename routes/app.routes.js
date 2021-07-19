@@ -9,13 +9,13 @@ router.get('/', async (req,res)=>{
     const existstVisitor = await Visitors.findOne({name : req.query.name})
 
     try {
-    if(req.query.name === undefined || req.query.name === '' || req.query.name === 'Anónimo' ){
+    if(req.query.name === undefined || req.query.name === ''){
 
         visitor.name = 'Anónimo';
         visitor.count = 1;
         await visitor.save();
     }
-    else{
+    if(req.query.name !== ''){
         if(existstVisitor){
             existstVisitor.count += 1;
             await existstVisitor.save();
