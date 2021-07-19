@@ -9,7 +9,7 @@ router.get('/', async (req,res)=>{
     const existstVisitor = await Visitors.findOne({name : req.query.name})
 
     try {
-    if(req.query.name === undefined || req.query.name === ''){
+    if(req.query.name === undefined || req.query.name === '' || req.query.name === 'Anónimo' ){
 
         visitor.name = 'Anónimo';
         visitor.count = 1;
@@ -27,9 +27,9 @@ router.get('/', async (req,res)=>{
                 
     }    
     
-} catch (error) {
-    console.log('error')
-}   
+    } catch (error) {
+        console.log('error')
+    }   
 
 const visitors = await Visitors.find();
 res.status(200).render('index',({visitors}))
