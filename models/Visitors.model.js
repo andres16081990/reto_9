@@ -8,7 +8,6 @@ const Schema = mongoose.Schema;
 const VisitorsSchema = new Schema({
     count : {
         type : Number,
-        default : 1
     },
     name :{
         type : String,

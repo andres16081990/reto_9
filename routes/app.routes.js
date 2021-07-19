@@ -11,15 +11,17 @@ router.get('/', async (req,res)=>{
     try {
     if(req.query.name === undefined || req.query.name === ''){
 
-        visitor.name = 'Anónimo'
+        visitor.name = 'Anónimo';
+        visitor.count = 1;
         await visitor.save();
     }
     else{
         if(existstVisitor){
             existstVisitor.count += 1;
-            existstVisitor.save();
+            await existstVisitor.save();
         } 
         if(!existstVisitor){
+            visitor.count = 1;
             await visitor.save();
         }        
                 
